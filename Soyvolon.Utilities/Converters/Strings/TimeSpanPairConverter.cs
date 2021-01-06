@@ -150,7 +150,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                         catch (IndexOutOfRangeException)
                         { // Looks like there was some missing data, return default
                             timeSpanPair = null;
-                            return false; ;
+                            return false;
                         }
 
                         // Check both the start number and end number to ensure they are numbers.
@@ -175,7 +175,7 @@ namespace Soyvolon.Utilities.Converters.Strings
             }
 
             // the start must be larger than the end value.
-            if(!(start > end))
+            if(start <= end)
             {
                 timeSpanPair = null;
                 return false;
