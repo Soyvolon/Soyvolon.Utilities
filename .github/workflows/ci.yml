@@ -1,10 +1,11 @@
 name: Build
 on:
   push:
-    tags-ignore: [ no-ci ]
+    branches-ignore: 
+      - 'noci/*'
   pull_request:
-    branches: [ main ]
-    tags-ignore: [ no-ci ]
+    branches-ignore:
+      - 'noci/*'
 
 jobs:
   build:
