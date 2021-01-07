@@ -38,6 +38,11 @@ namespace Soyvolon.Utilities.Converters.Strings
                     integerPair = new Tuple<int, int>(resLower, resHigher);
                     return true;
                 }
+                else
+                { // the second value isnt there, so set it as 0.
+                    integerPair = new Tuple<int, int>(resLower, 0);
+                    return true;
+                }
             }
             else
             { // check to see if the second value is a number ...

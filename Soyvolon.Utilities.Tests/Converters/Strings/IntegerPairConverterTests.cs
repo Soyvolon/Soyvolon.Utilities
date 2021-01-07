@@ -12,6 +12,7 @@ namespace Soyvolon.Utilities.Tests.Converters.Strings
         [TestCase("100 - 200", 100, 200)]
         [TestCase("100- 200", 100, 200)]
         [TestCase("100 -200", 100, 200)]
+        [TestCase("100-x", 100, 0)]
         public void TestValidInputs(string input, int first, int second)
         {
             Assert.True(IntegerPairConverter.TryParse(input, out var res),
@@ -23,6 +24,7 @@ namespace Soyvolon.Utilities.Tests.Converters.Strings
         }
 
         [TestCase("num-num")]
+        [TestCase("x-")]
         [TestCase("")]
         public void TestInvalidInputs(string input)
         {
