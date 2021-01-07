@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Soyvolon.Utilities.Converters.Strings
 {
     public static class TimeSpanPairConverter
     {
-        public static bool TryParse(string input, out Tuple<TimeSpan, TimeSpan>? timeSpanPair)
+        public static bool TryParse(string input, [NotNullWhen(true)] out Tuple<TimeSpan, TimeSpan>? timeSpanPair)
         {
             if (input is null || input == "") // No input, return defaults
             {

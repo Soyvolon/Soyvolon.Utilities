@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Soyvolon.Utilities.Converters.Strings
 {
     public static class IntegerPairConverter
     {
-        public static bool TryParse(string s, out Tuple<int, int>? integerPair)
+        public static bool TryParse(string s, [NotNullWhen(true)] out Tuple<int, int>? integerPair)
         {
             // make sure the string has a value.
             if(string.IsNullOrWhiteSpace(s))
