@@ -39,7 +39,8 @@ namespace Soyvolon.Utilities.Converters.Strings
                 }
                 // See if the first item is a symbol.
                 else if (items[c].StartsWith("<") || items[c].StartsWith(">"))
-                { // If it is, split the grouping into symbol and number.
+                {
+                    // If it is, split the grouping into symbol and number.
                     var startStr = items[c][0..1];
                     var dataStr = items[c][1..];
                     // And find out if the number is actually a number.
@@ -138,12 +139,10 @@ namespace Soyvolon.Utilities.Converters.Strings
                                 if (items[1].StartsWith("-") && !items[1].Equals("-"))
                                 { // Then substring the dash from the item.
                                     endStr = items[1][1..];
-                                    c = 1; // Adjust c for accuracy
                                 }
                                 else
                                 { // Otherwise, use the next item.
                                     endStr = items[2];
-                                    c = 2; // Adjust c for accuracy
                                 }
                             }
                             else
@@ -170,8 +169,6 @@ namespace Soyvolon.Utilities.Converters.Strings
                     }
                 }
             }
-            
-            
 
             // If nothing was changed from start, a value was not found. Return the default value.
             if (start == 0 && end == 0)

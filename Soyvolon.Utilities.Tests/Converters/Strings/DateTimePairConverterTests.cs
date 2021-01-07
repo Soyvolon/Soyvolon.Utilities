@@ -30,6 +30,8 @@ namespace Soyvolon.Utilities.Tests.Converters.Strings
         [TestCase("10- 5 years", 10 * 365, 5 * 365)] // years use a static 365
         [TestCase("10 - 5 things", 10, 5)]
         [TestCase("10-5", 10, 5)]
+        [TestCase("<10 days", 10, 0)]
+        [TestCase(">10 days", 0, 10)]
         public void ConvertValuePairTest(string arg, int startBehind, int endBehind)
         {
             Assert.True(TimeSpanPairConverter.TryParse(arg, out var pair),
@@ -65,6 +67,9 @@ namespace Soyvolon.Utilities.Tests.Converters.Strings
         [TestCase("10 10 -")]
         [TestCase("-")]
         [TestCase("x -")]
+        [TestCase(">nom nom")]
+        [TestCase("<nom nom")]
+        [TestCase("<")]
         [TestCase("")]
         [TestCase(null)]
         public void ConvertBadDataTest(string arg)
