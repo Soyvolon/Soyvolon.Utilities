@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Soyvolon.Utilities.Converters.Strings
 {
@@ -21,17 +22,23 @@ namespace Soyvolon.Utilities.Converters.Strings
             int c = 0;
 
             // Time to find the actuall timeframe, whats the start and end numbers.
-            if (items.Length > 0)
+            // See if the first item is a number.
+            if (int.TryParse(items[c], out int res1))
             {
-                // See if the first item is a number.
-                if (int.TryParse(items[c], out int res1))
+                // If it is, assign it to the start positon.
+                start = res1;
+                // increase C
+                c++;
+            }
+
+            if (items.Length > c)
+            {
+                if (int.TryParse(items[c], out var endRes))
                 {
-                    // If it is, assign it to the start positon.
-                    start = res1;
+                    end = endRes;
                 }
-            
                 // See if the first item is a symbol.
-                if (items[c].StartsWith("<") || items[c].StartsWith(">"))
+                else if (items[c].StartsWith("<") || items[c].StartsWith(">"))
                 { // If it is, split the grouping into symbol and number.
                     var startStr = items[c][0..1];
                     var dataStr = items[c][1..];
@@ -64,8 +71,6 @@ namespace Soyvolon.Utilities.Converters.Strings
                         if (int.TryParse(endStr, out var num))
                         { // ... save the number as the end point ...
                             end = num;
-                            // ... and adjust C for accuracy.
-                            c++;
                         }
                     }
                 }
@@ -99,7 +104,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                         }
                         else
                         { // looks like the second item was a lie,
-                            // set the endStr to a blank string for defaults.
+                          // set the endStr to a blank string for defaults.
                             endStr = "";
                         }
                     }
@@ -148,7 +153,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                             }
                         }
                         catch (IndexOutOfRangeException)
-                        { // Looks like there was some missing data, return default
+                        { // Looks like there was some missing data, return default.
                             timeSpanPair = null;
                             return false;
                         }
@@ -166,6 +171,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                 }
             }
             
+            
 
             // If nothing was changed from start, a value was not found. Return the default value.
             if (start == 0 && end == 0)
@@ -174,46 +180,36 @@ namespace Soyvolon.Utilities.Converters.Strings
                 return false;
             }
 
-            // the start must be larger than the end value.
-            if(start <= end)
+            // the start must be larger than the end value when both are not zero.
+            if(start != 0 && end != 0 && start <= end)
             {
                 timeSpanPair = null;
                 return false;
             }
 
-            c++; // Moving to the next part
-
             TimeSpan startSpan;
             TimeSpan endSpan;
 
-            // Time to find the span, is it months, days, weeks, etc?
-            if (items.Length > c)
-            {
-                var edited = items[c].Trim().ToLower();
+           // get the last value for modifiers.
+            var edited = items[^1].Trim().ToLower();
 
-                if (edited.Contains("week"))
-                {
-                    startSpan = TimeSpan.FromDays(start * 7);
-                    endSpan = TimeSpan.FromDays(end * 7);
-                }
-                else if (edited.Contains("month"))
-                {
-                    startSpan = TimeSpan.FromDays(start * 30);
-                    endSpan = TimeSpan.FromDays(end * 30);
-                }
-                else if (edited.Contains("year"))
-                {
-                    startSpan = TimeSpan.FromDays(start * 365);
-                    endSpan = TimeSpan.FromDays(end * 365);
-                }
-                else
-                { // Nothing matches, assume days
-                    startSpan = TimeSpan.FromDays(start);
-                    endSpan = TimeSpan.FromDays(end);
-                }
+            if (edited.Contains("week"))
+            {
+                startSpan = TimeSpan.FromDays(start * 7);
+                endSpan = TimeSpan.FromDays(end * 7);
+            }
+            else if (edited.Contains("month"))
+            {
+                startSpan = TimeSpan.FromDays(start * 30);
+                endSpan = TimeSpan.FromDays(end * 30);
+            }
+            else if (edited.Contains("year"))
+            {
+                startSpan = TimeSpan.FromDays(start * 365);
+                endSpan = TimeSpan.FromDays(end * 365);
             }
             else
-            { // there is no time modifier, so assume days.
+            { // Nothing matches, assume days
                 startSpan = TimeSpan.FromDays(start);
                 endSpan = TimeSpan.FromDays(end);
             }

@@ -48,7 +48,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                 }
             }
 
-            // ... if nothing works, return null;
+            // ... if nothing works, return null.
             integerPair = null;
             return false;
         }
