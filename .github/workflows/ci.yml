@@ -2,10 +2,10 @@ name: Build
 on:
   push:
     branches-ignore: 
-      - 'noci/*'
+      - 'noci/**'
   pull_request:
     branches-ignore:
-      - 'noci/*'
+      - 'noci/**'
 
 jobs:
   build:
