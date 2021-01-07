@@ -46,6 +46,7 @@ namespace Soyvolon.Utilities.Tests.Converters.Strings
         [TestCase("10 -x days", 10, 0)]
         [TestCase("10 - x days", 10, 0)]
         [TestCase("10 -", 10, 0)]
+        [TestCase("10 1-0-0", 1, 0)] // intended design to prioratize a grouping over a single number.
         public void ConvertBadSecondValueTest(string arg, int startBehind, int endBehind)
         {
             Assert.True(TimeSpanPairConverter.TryParse(arg, out var pair),

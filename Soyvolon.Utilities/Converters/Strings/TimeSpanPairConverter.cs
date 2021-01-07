@@ -96,6 +96,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                     if (split.Length != 2)
                     {
                         // the dash had no leading space, but a trailing one. Attempt to get another vaue from items.
+
                         startStr = split[0];
                         // make sure we have another item ...
                         if (items.Length > c + 1)
@@ -124,49 +125,11 @@ namespace Soyvolon.Utilities.Converters.Strings
                         }
                     } // If either fails, ignore it, they both wind up being zero and default will be returned later.
                 }
-                else
-                { // lastly, check to see if there were spaces between the range operator.
-                    if (input.Contains("-"))
-                    { // if there was, split by the range operator and find the two numerical values.
-                        string startStr;
-                        string endStr;
-                        try
-                        {
-                            if (items[1].Contains("-"))
-                            { // We know where the dash is, so find the start and end values.
-                                startStr = items[0];
-                                // If the dash item is also the second number, because it starts with a dash but does not equal it,
-                                if (items[1].StartsWith("-") && !items[1].Equals("-"))
-                                { // Then substring the dash from the item.
-                                    endStr = items[1][1..];
-                                }
-                                else
-                                { // Otherwise, use the next item.
-                                    endStr = items[2];
-                                }
-                            }
-                            else
-                            { // The dash is in the wrong spot, so ignore this section. Return default.
-                                timeSpanPair = null;
-                                return false;
-                            }
-                        }
-                        catch (IndexOutOfRangeException)
-                        { // Looks like there was some missing data, return default.
-                            timeSpanPair = null;
-                            return false;
-                        }
-
-                        // Check both the start number and end number to ensure they are numbers.
-                        if (int.TryParse(startStr, out int resStart))
-                        { // Assign the start to start ...
-                            start = resStart;
-                            if (int.TryParse(endStr, out int resEnd))
-                            { // ... and end to end.
-                                end = resEnd;
-                            }
-                        } // If both fail, ignore it, they both wind up being zero and default will be returned later.
-                    }
+                else if (input.Contains("-"))
+                {
+                    // this is an invalid configuration.
+                    timeSpanPair = null;
+                    return false;
                 }
             }
 
