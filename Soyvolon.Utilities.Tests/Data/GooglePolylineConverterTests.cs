@@ -3,6 +3,7 @@
 using NUnit.Framework;
 
 using Soyvolon.Utilities.Data;
+using Soyvolon.Utilities.Data.Extensions;
 
 namespace Soyvolon.Utilities.Tests.Data
 {
@@ -20,5 +21,15 @@ namespace Soyvolon.Utilities.Tests.Data
 
             Assert.True(data.Equals(res), $"Data: {data} does not equal the expected value: {res}");
         }
+
+
+        [TestCase(-54.29393, "`hkjI")]
+        public void TestSingleExtension(double lat, string res)
+            => Assert.True(lat.GetPolyline() == res, "Failed to generate correct extension result.");
+
+
+        [TestCase(-54.29393, -36.32949, "`hkjIhrv|E")]
+        public void TestDoubleExtension(double lat, double lng, string res)
+            => Assert.True(new Tuple<double, double>(lat, lng).GetPolyline() == res, "Failed to gereate correct extension result.");
     }
 }
