@@ -61,5 +61,23 @@ namespace Soyvolon.Utilities.Data
             // ... then return the completed string.
             return str.ToString();
         }
+
+        /// <summary>
+        /// Encodes a list of coords
+        /// </summary>
+        /// <param name="coords">Coordnate pairs to encode.</param>
+        /// <returns>Polyline string</returns>
+        public static string Encode(IList<Tuple<double, double>> coords)
+        {
+            string output = "";
+            Tuple<double, double> lastPair = new Tuple<double, double>(0, 0);
+            foreach (var c in coords)
+            {
+                output += Encode(c.Item1 - lastPair.Item1, c.Item2 - lastPair.Item2);
+                lastPair = c;
+            }
+
+            return output;
+        }
     }
 }

@@ -11,6 +11,9 @@ namespace Soyvolon.Utilities.Data.Extensions
         public static string GetPolyline(this Tuple<double, double> pair)
             => GooglePolylineEncoder.Encode(pair.Item1, pair.Item2);
 
+        public static string GetPolyline(this IList<Tuple<double, double>> pairs)
+            => GooglePolylineEncoder.Encode(pairs);
+
         public static string GetPolyline(this double val)
             => GooglePolylineEncoder.Encode(val);
     }

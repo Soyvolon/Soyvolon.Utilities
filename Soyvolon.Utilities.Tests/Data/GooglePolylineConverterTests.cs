@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using NUnit.Framework;
 
@@ -22,6 +23,17 @@ namespace Soyvolon.Utilities.Tests.Data
             Assert.True(data.Equals(res), $"Data: {data} does not equal the expected value: {res}");
         }
 
+        [TestCase("m|wwFbrwtOm@Yr@}@", 40.75991, -87.45266, 40.76014, -87.45253, 40.75988, -87.45222)]
+        public void TestListEncode(string res, params double[] inData)
+        {
+            var set = new List<Tuple<double, double>>();
+            for (int i = 0; i < inData.Length; i++)
+                set.Add(new(inData[i++], inData[i]));
+
+            var data = set.GetPolyline();
+
+            Assert.True(data.Equals(res), $"Data: {data} does not equal the expected value: {res}");
+        }
 
         [TestCase(-54.29393, "`hkjI")]
         public void TestSingleExtension(double lat, string res)
