@@ -193,7 +193,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                 end = DateTime.Now - span.Item2;
             }
 
-            return new(start, end);
+            return new Tuple<DateTime, DateTime>(start, end);
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Soyvolon.Utilities
 {
     internal static class Utilities
     {
-        internal readonly static Random Random = new();
+        internal readonly static Random Random = new Random();
     }
 }
