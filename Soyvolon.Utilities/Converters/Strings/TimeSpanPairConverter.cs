@@ -5,7 +5,7 @@ namespace Soyvolon.Utilities.Converters.Strings
 {
     public static class TimeSpanPairConverter
     {
-        public static bool TryParse(string input, [NotNullWhen(true)] out Tuple<TimeSpan, TimeSpan>? timeSpanPair)
+        public static bool TryParse(string input, out Tuple<TimeSpan, TimeSpan> timeSpanPair)
         {
             if (input is null || input == "") // No input, return defaults
             {
@@ -17,7 +17,7 @@ namespace Soyvolon.Utilities.Converters.Strings
             int end = 0;
             // Follows rules for AO3 Date Search
             // Split the item by blank spaces
-            var items = input.Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var items = input.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             // Create a counter to keep track of position
             int c = 0;
 
@@ -41,8 +41,8 @@ namespace Soyvolon.Utilities.Converters.Strings
                 else if (items[c].StartsWith("<") || items[c].StartsWith(">"))
                 {
                     // If it is, split the grouping into symbol and number.
-                    var startStr = items[c][0..1];
-                    var dataStr = items[c][1..];
+                    var startStr = items[c].Substring(0, 1);
+                    var dataStr = items[c].Substring(1);
                     // And find out if the number is actually a number.
                     if (int.TryParse(dataStr, out int res2))
                     { // If it is, test for the direction of the symbol
@@ -78,7 +78,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                 // ... see if it starts with a dash ...
                 else if (items[c].StartsWith("-"))
                 { // ... and take the raw value without the dash ...
-                    var endStr = items[c][1..];
+                    var endStr = items[c].Substring(1);
                     // ... then try and convrt it to a number ...
                     if (int.TryParse(endStr, out var num))
                     {
@@ -89,7 +89,7 @@ namespace Soyvolon.Utilities.Converters.Strings
                 // Otherwise, see if it is a range and contains the range operator
                 else if (items[c].Contains("-"))
                 { // if it is, split the item by the range operator
-                    var split = items[c].Split("-", StringSplitOptions.RemoveEmptyEntries);
+                    var split = items[c].Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
 
                     string startStr;
                     string endStr;
@@ -151,7 +151,7 @@ namespace Soyvolon.Utilities.Converters.Strings
             TimeSpan endSpan;
 
            // get the last value for modifiers.
-            var edited = items[^1].Trim().ToLower();
+            var edited = items[items.Length - 1].Trim().ToLower();
 
             if (edited.Contains("week"))
             {

@@ -5,7 +5,7 @@ namespace Soyvolon.Utilities.Converters.Strings
 {
     public static class IntegerPairConverter
     {
-        public static bool TryParse(string s, [NotNullWhen(true)] out Tuple<int, int>? integerPair)
+        public static bool TryParse(string s, out Tuple<int, int> integerPair)
         {
             // make sure the string has a value.
             if(string.IsNullOrWhiteSpace(s))
@@ -15,7 +15,7 @@ namespace Soyvolon.Utilities.Converters.Strings
             }
 
             // split the two numbers at the middle ...
-            var parts = s.Trim().Split('-', StringSplitOptions.RemoveEmptyEntries);
+            var parts = s.Trim().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
             // ... see if there is only a single part ...
             if (parts.Length <= 1)
             { // ... if there is, try and convert it to a number ...
