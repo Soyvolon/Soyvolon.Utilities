@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. sln", "1. sln", "{D72EDC
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soyovlon.Utilities", "Soyovlon.Utilities\Soyovlon.Utilities.csproj", "{B51115A0-BE44-488D-8CD2-BADA28AAA14B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soyvolon.Utilities", "Soyvolon.Utilities\Soyvolon.Utilities.csproj", "{3D7BD1ED-254E-4C92-B2B4-7D987A65294F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +24,10 @@ Global
 		{60D3C8C5-07B6-4790-83DA-6D51B689AF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60D3C8C5-07B6-4790-83DA-6D51B689AF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60D3C8C5-07B6-4790-83DA-6D51B689AF86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B51115A0-BE44-488D-8CD2-BADA28AAA14B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B51115A0-BE44-488D-8CD2-BADA28AAA14B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B51115A0-BE44-488D-8CD2-BADA28AAA14B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B51115A0-BE44-488D-8CD2-BADA28AAA14B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7BD1ED-254E-4C92-B2B4-7D987A65294F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7BD1ED-254E-4C92-B2B4-7D987A65294F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7BD1ED-254E-4C92-B2B4-7D987A65294F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7BD1ED-254E-4C92-B2B4-7D987A65294F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
